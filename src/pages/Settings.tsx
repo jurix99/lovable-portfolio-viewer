@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Header } from "../components/layout/Header";
 import { Sidebar } from "../components/layout/Sidebar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
 import {
   Card,
   CardContent,
@@ -11,45 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { ApiKeyForm } from "@/components/settings/ApiKeyForm";
 
-const apiKeySchema = z.object({
-  apiKey: z.string().min(1, "La clé API est requise"),
-  apiSecret: z.string().min(1, "La clé secrète est requise"),
-  passphrase: z.string().min(1, "La passphrase est requise"),
-});
+type Exchange = "kucoin" | "binance" | null;
 
 const Settings = () => {
-  const { toast } = useToast();
-  const form = useForm<z.infer<typeof apiKeySchema>>({
-    resolver: zodResolver(apiKeySchema),
-    defaultValues: {
-      apiKey: "",
-      apiSecret: "",
-      passphrase: "",
-    },
-  });
-
-  const onSubmit = (values: z.infer<typeof apiKeySchema>) => {
-    // TODO: Sauvegarder les clés API de manière sécurisée
-    console.log(values);
-    toast({
-      title: "Configuration sauvegardée",
-      description: "Vos clés API Kucoin ont été enregistrées avec succès.",
-    });
-    form.reset();
-  };
+  const [selectedExchange, setSelectedExchange] = useState<Exchange>(null);
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -65,73 +30,22 @@ const Settings = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
+              <div className="flex gap-4 mb-8">
+                <Button
+                  variant={selectedExchange === "kucoin" ? "default" : "outline"}
+                  onClick={() => setSelectedExchange("kucoin")}
                 >
-                  <div className="space-y-4">
-                    <FormField
-                      control={form.control}
-                      name="apiKey"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Clé API Kucoin</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Entrez votre clé API"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription>
-                            Vous pouvez trouver votre clé API dans les paramètres
-                            de votre compte Kucoin
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                  KuCoin
+                </Button>
+                <Button
+                  variant={selectedExchange === "binance" ? "default" : "outline"}
+                  onClick={() => setSelectedExchange("binance")}
+                >
+                  Binance
+                </Button>
+              </div>
 
-                    <FormField
-                      control={form.control}
-                      name="apiSecret"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Clé secrète</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="password"
-                              placeholder="Entrez votre clé secrète"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="passphrase"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Passphrase</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="password"
-                              placeholder="Entrez votre passphrase"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <Button type="submit">Sauvegarder</Button>
-                </form>
-              </Form>
+              {selectedExchange && <ApiKeyForm exchange={selectedExchange} />}
             </CardContent>
           </Card>
         </div>
