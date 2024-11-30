@@ -30,17 +30,29 @@ const Settings = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex gap-4 mb-8">
+              <div className="grid grid-cols-2 gap-4 mb-8 max-w-md">
                 <Button
                   variant={selectedExchange === "kucoin" ? "default" : "outline"}
                   onClick={() => setSelectedExchange("kucoin")}
+                  className="h-auto py-6 flex flex-col gap-4"
                 >
+                  <img 
+                    src="https://assets.staticimg.com/cms/media/1lB3PkckFDyfxz6VudCEACBeRRBi6sQQ7DDjz0yWM.svg" 
+                    alt="KuCoin" 
+                    className="h-12 w-12"
+                  />
                   KuCoin
                 </Button>
                 <Button
                   variant={selectedExchange === "binance" ? "default" : "outline"}
                   onClick={() => setSelectedExchange("binance")}
+                  className="h-auto py-6 flex flex-col gap-4"
                 >
+                  <img 
+                    src="https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png" 
+                    alt="Binance" 
+                    className="h-12 w-12"
+                  />
                   Binance
                 </Button>
               </div>
