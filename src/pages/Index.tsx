@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getKucoinCredentials } from "@/utils/kucoin";
 import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 export default function Index() {
   const navigate = useNavigate();
@@ -25,10 +26,9 @@ export default function Index() {
       toast({
         title: "KuCoin API not configured",
         description: "Please configure your KuCoin API keys in the settings page",
-        action: {
-          label: "Go to Settings",
-          onClick: () => navigate("/settings"),
-        },
+        action: <ToastAction altText="Go to Settings" onClick={() => navigate("/settings")}>
+          Go to Settings
+        </ToastAction>,
       });
     }
   }, [navigate]);
