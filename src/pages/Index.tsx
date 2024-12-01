@@ -3,6 +3,7 @@ import { Header } from "../components/layout/Header";
 import { Sidebar } from "../components/layout/Sidebar";
 import { DashboardCard } from "../components/dashboard/DashboardCard";
 import { PortfolioChart } from "../components/dashboard/PortfolioChart";
+import { TokenDistribution } from "../components/dashboard/TokenDistribution";
 
 const Index = () => {
   return (
@@ -31,7 +32,14 @@ const Index = () => {
               icon={<Coins className="h-6 w-6 text-green-500" />}
             />
           </div>
-          <PortfolioChart />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <PortfolioChart />
+            </div>
+            <div>
+              <TokenDistribution />
+            </div>
+          </div>
         </div>
       </main>
     </div>
