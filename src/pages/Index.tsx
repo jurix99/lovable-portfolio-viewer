@@ -1,53 +1,51 @@
-import { Coins, TrendingUp, Wallet } from "lucide-react";
-import { Header } from "../components/layout/Header";
-import { Sidebar } from "../components/layout/Sidebar";
-import { DashboardCard } from "../components/dashboard/DashboardCard";
-import { PortfolioChart } from "../components/dashboard/PortfolioChart";
-import { TokenDistribution } from "../components/dashboard/TokenDistribution";
-import { TokenPerformance } from "../components/dashboard/TokenPerformance";
+import { Card } from "@/components/ui/card";
+import { PortfolioChart } from "@/components/dashboard/PortfolioChart";
+import { TokenDistribution } from "@/components/dashboard/TokenDistribution";
+import { TokenPerformance } from "@/components/dashboard/TokenPerformance";
+import { TradingViewWidget } from "@/components/dashboard/TradingViewWidget";
 
-const Index = () => {
+export default function Index() {
   return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar />
-      <main className="flex-1">
-        <Header />
-        <div className="p-6 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <DashboardCard
-              title="Total Balance"
-              value="£3,126.00"
-              change={{ value: "+£31.89", percentage: "1.02%", isPositive: true }}
-              icon={<Wallet className="h-6 w-6 text-blue-500" />}
-            />
-            <DashboardCard
-              title="24h Volume"
-              value="£12,426.00"
-              change={{ value: "-£142.32", percentage: "1.14%", isPositive: false }}
-              icon={<TrendingUp className="h-6 w-6 text-purple-500" />}
-            />
-            <DashboardCard
-              title="Total Assets"
-              value="12"
-              change={{ value: "+2", percentage: "20%", isPositive: true }}
-              icon={<Coins className="h-6 w-6 text-green-500" />}
-            />
-          </div>
-          <div className="w-full">
-            <PortfolioChart />
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              <TokenPerformance />
-            </div>
-            <div>
-              <TokenDistribution />
-            </div>
-          </div>
-        </div>
-      </main>
+    <div className="flex flex-col gap-4 p-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="p-4">
+          <h2 className="font-semibold">Total Balance</h2>
+          <p className="text-2xl font-bold">$12,345.67</p>
+        </Card>
+        <Card className="p-4">
+          <h2 className="font-semibold">24h Change</h2>
+          <p className="text-2xl font-bold text-green-500">+5.67%</p>
+        </Card>
+        <Card className="p-4">
+          <h2 className="font-semibold">Total Profit</h2>
+          <p className="text-2xl font-bold text-green-500">+$1,234.56</p>
+        </Card>
+        <Card className="p-4">
+          <h2 className="font-semibold">Active Positions</h2>
+          <p className="text-2xl font-bold">8</p>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card className="p-4">
+          <h2 className="mb-4 font-semibold">Portfolio Overview</h2>
+          <PortfolioChart />
+        </Card>
+        <Card className="p-4">
+          <h2 className="mb-4 font-semibold">Token Distribution</h2>
+          <TokenDistribution />
+        </Card>
+      </div>
+
+      <Card className="p-4">
+        <h2 className="mb-4 font-semibold">TradingView Chart</h2>
+        <TradingViewWidget />
+      </Card>
+
+      <Card className="p-4">
+        <h2 className="mb-4 font-semibold">Token Performance</h2>
+        <TokenPerformance />
+      </Card>
     </div>
   );
-};
-
-export default Index;
+}
