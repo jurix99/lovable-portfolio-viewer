@@ -4,6 +4,7 @@ import { Sidebar } from "../components/layout/Sidebar";
 import { DashboardCard } from "../components/dashboard/DashboardCard";
 import { PortfolioChart } from "../components/dashboard/PortfolioChart";
 import { TokenDistribution } from "../components/dashboard/TokenDistribution";
+import { TokenPerformance } from "../components/dashboard/TokenPerformance";
 
 const Index = () => {
   return (
@@ -39,6 +40,9 @@ const Index = () => {
             <div>
               <TokenDistribution />
             </div>
+          </div>
+          <div>
+            <TokenPerformance />
           </div>
         </div>
       </main>
