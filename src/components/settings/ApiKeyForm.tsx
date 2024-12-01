@@ -22,9 +22,10 @@ const apiKeySchema = z.object({
 
 type ApiKeyFormProps = {
   exchange: "kucoin" | "binance";
+  onSuccess?: () => void;
 };
 
-export const ApiKeyForm = ({ exchange }: ApiKeyFormProps) => {
+export const ApiKeyForm = ({ exchange, onSuccess }: ApiKeyFormProps) => {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof apiKeySchema>>({
     resolver: zodResolver(apiKeySchema),
@@ -42,6 +43,7 @@ export const ApiKeyForm = ({ exchange }: ApiKeyFormProps) => {
       description: `Vos clés API ${exchange} ont été enregistrées avec succès.`,
     });
     form.reset();
+    onSuccess?.();
   };
 
   return (

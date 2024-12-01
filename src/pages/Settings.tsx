@@ -1,4 +1,4 @@
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,13 +27,58 @@ const EXCHANGES = [
 
 const Settings = () => {
   const [selectedExchange, setSelectedExchange] = useState<"kucoin" | "binance" | null>(null);
+  const [configuredSources, setConfiguredSources] = useState<Array<{id: string, name: string, logo: string}>>([]);
+
+  const handleSaveConfiguration = (exchange: typeof EXCHANGES[0]) => {
+    if (!configuredSources.find(source => source.id === exchange.id)) {
+      setConfiguredSources([...configuredSources, exchange]);
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1">
         <Header />
-        <div className="p-6">
+        <div className="p-6 space-y-6">
+          {/* Configured Sources */}
+          {configuredSources.length > 0 && (
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold">Configured Sources</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {configuredSources.map((source) => (
+                  <Dialog key={source.id}>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="w-full h-20 flex items-center justify-between px-4"
+                      >
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={source.logo}
+                            alt={source.name}
+                            className="h-10 w-10"
+                          />
+                          <span>{source.name}</span>
+                        </div>
+                        <Pencil className="h-4 w-4 text-muted-foreground" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Edit {source.name} Configuration</DialogTitle>
+                      </DialogHeader>
+                      <ApiKeyForm 
+                        exchange={source.id as "kucoin" | "binance"} 
+                      />
+                    </DialogContent>
+                  </Dialog>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Add New Source Button */}
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="outline" className="w-full border-dashed">
@@ -67,7 +112,10 @@ const Settings = () => {
                         <DialogTitle>Connect to {exchange.name}</DialogTitle>
                       </DialogHeader>
                       {selectedExchange && (
-                        <ApiKeyForm exchange={selectedExchange} />
+                        <ApiKeyForm 
+                          exchange={selectedExchange} 
+                          onSuccess={() => handleSaveConfiguration(exchange)}
+                        />
                       )}
                     </DialogContent>
                   </Dialog>
