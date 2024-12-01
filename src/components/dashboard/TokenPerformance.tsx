@@ -91,6 +91,7 @@ export const TokenPerformance = () => {
             <TableRow>
               <TableHead className="text-gray-400">Asset</TableHead>
               <TableHead className="text-gray-400">Current Price</TableHead>
+              <TableHead className="text-gray-400">Purchase Price</TableHead>
               <TableHead className="text-gray-400">Profit/Loss</TableHead>
               <TableHead className="text-gray-400">24h</TableHead>
               <TableHead className="text-gray-400">7d</TableHead>
@@ -116,6 +117,9 @@ export const TokenPerformance = () => {
                   </TableCell>
                   <TableCell className="text-white">
                     {formatPrice(token.currentPrice)}
+                  </TableCell>
+                  <TableCell className="text-white">
+                    {formatPrice(token.purchasePrice)}
                   </TableCell>
                   <TableCell>
                     <div className={`flex items-center gap-1 ${profit >= 0 ? 'text-green-500' : 'text-red-500'}`}>

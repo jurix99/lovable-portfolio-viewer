@@ -33,16 +33,16 @@ const Index = () => {
               icon={<Coins className="h-6 w-6 text-green-500" />}
             />
           </div>
+          <div className="w-full">
+            <PortfolioChart />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
-              <PortfolioChart />
+              <TokenPerformance />
             </div>
             <div>
               <TokenDistribution />
             </div>
-          </div>
-          <div>
-            <TokenPerformance />
           </div>
         </div>
       </main>
