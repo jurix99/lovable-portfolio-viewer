@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ApiKeyForm } from "@/components/settings/ApiKeyForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "../components/layout/Header";
 
 const EXCHANGES = [
@@ -24,15 +24,27 @@ const EXCHANGES = [
   },
 ];
 
+const STORAGE_KEY = 'configured_sources';
+
 const Settings = () => {
   const [selectedExchange, setSelectedExchange] = useState<"kucoin" | "binance" | null>(null);
   const [configuredSources, setConfiguredSources] = useState<Array<{id: string, name: string, logo: string}>>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
+  // Load configured sources from localStorage on component mount
+  useEffect(() => {
+    const savedSources = localStorage.getItem(STORAGE_KEY);
+    if (savedSources) {
+      setConfiguredSources(JSON.parse(savedSources));
+    }
+  }, []);
+
   const handleSaveConfiguration = (exchange: typeof EXCHANGES[0]) => {
     if (!configuredSources.find(source => source.id === exchange.id)) {
-      setConfiguredSources([...configuredSources, exchange]);
+      const updatedSources = [...configuredSources, exchange];
+      setConfiguredSources(updatedSources);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedSources));
     }
   };
 
