@@ -3,8 +3,36 @@ import { PortfolioChart } from "@/components/dashboard/PortfolioChart";
 import { TokenDistribution } from "@/components/dashboard/TokenDistribution";
 import { TokenPerformance } from "@/components/dashboard/TokenPerformance";
 import { Header } from "@/components/layout/Header";
+import { useQuery } from "@tanstack/react-query";
+import { fetchKucoinBalance } from "@/utils/kucoin";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getKucoinCredentials } from "@/utils/kucoin";
+import { toast } from "@/components/ui/use-toast";
 
 export default function Index() {
+  const navigate = useNavigate();
+
+  const { data: balanceData, isLoading, error } = useQuery({
+    queryKey: ['kucoinBalance'],
+    queryFn: fetchKucoinBalance,
+    enabled: !!getKucoinCredentials(),
+  });
+
+  useEffect(() => {
+    const credentials = getKucoinCredentials();
+    if (!credentials) {
+      toast({
+        title: "KuCoin API not configured",
+        description: "Please configure your KuCoin API keys in the settings page",
+        action: {
+          label: "Go to Settings",
+          onClick: () => navigate("/settings"),
+        },
+      });
+    }
+  }, [navigate]);
+
   return (
     <div className="h-screen">
       <Header />
@@ -12,7 +40,13 @@ export default function Index() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card className="p-4">
             <h2 className="font-semibold">Total Balance</h2>
-            <p className="text-2xl font-bold">$12,345.67</p>
+            {isLoading ? (
+              <p className="text-2xl font-bold animate-pulse">Loading...</p>
+            ) : error ? (
+              <p className="text-2xl font-bold text-red-500">Error loading data</p>
+            ) : (
+              <p className="text-2xl font-bold">${balanceData?.totalBalance || '0.00'}</p>
+            )}
           </Card>
           <Card className="p-4">
             <h2 className="font-semibold">24h Change</h2>
