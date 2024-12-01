@@ -44,7 +44,7 @@ export const TokenDistribution = () => {
 
       <div className="flex justify-center mb-8">
         <div className="relative w-48 h-48">
-          <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200">
+          <svg className="w-full h-full" viewBox="0 0 200 200">
             {TOKENS.map((token, index) => {
               const percentage = token.percentage;
               const strokeDasharray = (circumference * percentage) / 100;
@@ -63,12 +63,13 @@ export const TokenDistribution = () => {
                   strokeDasharray={`${strokeDasharray} ${circumference}`}
                   strokeDashoffset={strokeDashoffset}
                   className="transition-all duration-1000 ease-in-out"
+                  transform="rotate(-90 100 100)"
                 />
               );
             })}
             <text
               x="100"
-              y="100"
+              y="90"
               textAnchor="middle"
               dominantBaseline="middle"
               className="text-3xl font-bold fill-white"
@@ -77,7 +78,7 @@ export const TokenDistribution = () => {
             </text>
             <text
               x="100"
-              y="125"
+              y="115"
               textAnchor="middle"
               dominantBaseline="middle"
               className="text-sm fill-gray-400"
