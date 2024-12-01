@@ -62,7 +62,7 @@ export const PortfolioChart = () => {
     <div className="w-full h-[400px] glass rounded-3xl p-6 animate-fade-up">
       <div className="flex flex-col gap-1 mb-6">
         <div className="flex items-baseline gap-2">
-          <h3 className="text-4xl font-bold bg-gradient-to-r from-pink-400 to-pink-500 bg-clip-text text-transparent">
+          <h3 className="text-4xl font-bold bg-gradient-to-r from-violet-400 to-violet-500 bg-clip-text text-transparent">
             $34,534.24
           </h3>
           <span className="text-[#4CAF50] bg-[#4CAF50]/10 px-2 py-1 rounded-full text-sm">
@@ -77,8 +77,8 @@ export const PortfolioChart = () => {
           <AreaChart data={getData()}>
             <defs>
               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="rgb(244, 114, 182)" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="rgb(244, 114, 182)" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0}/>
               </linearGradient>
             </defs>
             <XAxis 
@@ -97,7 +97,7 @@ export const PortfolioChart = () => {
             />
             <Tooltip
               contentStyle={{
-                background: "rgba(23, 19, 29, 0.9)",
+                background: "rgba(13, 15, 25, 0.9)",
                 border: "1px solid rgba(255, 255, 255, 0.1)",
                 borderRadius: "12px",
                 padding: "12px",
@@ -108,7 +108,7 @@ export const PortfolioChart = () => {
             <Area
               type="monotone"
               dataKey="value"
-              stroke="rgb(244, 114, 182)"
+              stroke="#8B5CF6"
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#colorValue)"
