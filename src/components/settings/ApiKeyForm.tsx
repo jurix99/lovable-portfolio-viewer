@@ -23,9 +23,10 @@ const apiKeySchema = z.object({
 type ApiKeyFormProps = {
   exchange: "kucoin" | "binance";
   onSuccess?: () => void;
+  onClose?: () => void;
 };
 
-export const ApiKeyForm = ({ exchange, onSuccess }: ApiKeyFormProps) => {
+export const ApiKeyForm = ({ exchange, onSuccess, onClose }: ApiKeyFormProps) => {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof apiKeySchema>>({
     resolver: zodResolver(apiKeySchema),
@@ -44,6 +45,7 @@ export const ApiKeyForm = ({ exchange, onSuccess }: ApiKeyFormProps) => {
     });
     form.reset();
     onSuccess?.();
+    onClose?.();
   };
 
   return (
@@ -57,7 +59,11 @@ export const ApiKeyForm = ({ exchange, onSuccess }: ApiKeyFormProps) => {
               <FormItem>
                 <FormLabel>Clé API {exchange}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Entrez votre clé API" {...field} />
+                  <Input 
+                    placeholder="Entrez votre clé API" 
+                    {...field} 
+                    className="bg-transparent"
+                  />
                 </FormControl>
                 <FormDescription>
                   Vous pouvez trouver votre clé API dans les paramètres de votre compte {exchange}
@@ -78,6 +84,7 @@ export const ApiKeyForm = ({ exchange, onSuccess }: ApiKeyFormProps) => {
                     type="password"
                     placeholder="Entrez votre clé secrète"
                     {...field}
+                    className="bg-transparent"
                   />
                 </FormControl>
                 <FormMessage />
@@ -96,6 +103,7 @@ export const ApiKeyForm = ({ exchange, onSuccess }: ApiKeyFormProps) => {
                     type="password"
                     placeholder="Entrez votre passphrase"
                     {...field}
+                    className="bg-transparent"
                   />
                 </FormControl>
                 <FormMessage />

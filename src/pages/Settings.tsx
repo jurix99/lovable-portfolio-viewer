@@ -28,6 +28,8 @@ const EXCHANGES = [
 const Settings = () => {
   const [selectedExchange, setSelectedExchange] = useState<"kucoin" | "binance" | null>(null);
   const [configuredSources, setConfiguredSources] = useState<Array<{id: string, name: string, logo: string}>>([]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const handleSaveConfiguration = (exchange: typeof EXCHANGES[0]) => {
     if (!configuredSources.find(source => source.id === exchange.id)) {
@@ -47,7 +49,11 @@ const Settings = () => {
               <h2 className="text-lg font-semibold">Configured Sources</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {configuredSources.map((source) => (
-                  <Dialog key={source.id}>
+                  <Dialog 
+                    key={source.id}
+                    open={isEditDialogOpen}
+                    onOpenChange={setIsEditDialogOpen}
+                  >
                     <DialogTrigger asChild>
                       <Button
                         variant="outline"
@@ -70,6 +76,7 @@ const Settings = () => {
                       </DialogHeader>
                       <ApiKeyForm 
                         exchange={source.id as "kucoin" | "binance"} 
+                        onClose={() => setIsEditDialogOpen(false)}
                       />
                     </DialogContent>
                   </Dialog>
@@ -79,7 +86,7 @@ const Settings = () => {
           )}
 
           {/* Add New Source Button */}
-          <Dialog>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button variant="outline" className="w-full border-dashed">
                 <PlusCircle className="mr-2 h-4 w-4" />
@@ -115,6 +122,7 @@ const Settings = () => {
                         <ApiKeyForm 
                           exchange={selectedExchange} 
                           onSuccess={() => handleSaveConfiguration(exchange)}
+                          onClose={() => setIsDialogOpen(false)}
                         />
                       )}
                     </DialogContent>
