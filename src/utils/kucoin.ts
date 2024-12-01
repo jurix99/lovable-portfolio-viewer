@@ -20,13 +20,14 @@ export const fetchKucoinBalance = async () => {
 
   const timestamp = Date.now();
   const endpoint = '/api/v1/accounts';
+  const proxyUrl = 'https://cors-proxy.fringe.zone'; // Using a CORS proxy
   const baseUrl = 'https://api.kucoin.com';
 
   // Create the signature (this is a simplified version, you'll need to implement proper signature generation)
   const signature = await createSignature(endpoint, 'GET', '', timestamp, credentials.apiSecret);
 
   try {
-    const response = await fetch(`${baseUrl}${endpoint}`, {
+    const response = await fetch(`${proxyUrl}/${baseUrl}${endpoint}`, {
       method: 'GET',
       headers: {
         'KC-API-KEY': credentials.apiKey,
@@ -34,6 +35,7 @@ export const fetchKucoinBalance = async () => {
         'KC-API-TIMESTAMP': timestamp.toString(),
         'KC-API-PASSPHRASE': credentials.passphrase,
         'KC-API-VERSION': '2',
+        'Origin': window.location.origin,
       },
     });
 
