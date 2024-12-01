@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const dailyData = [
@@ -59,37 +59,66 @@ export const PortfolioChart = () => {
   };
 
   return (
-    <div className="w-full h-[300px] glass rounded-2xl p-6 animate-fade-up">
+    <div className="w-full h-[300px] bg-[#1a1625]/60 backdrop-blur-sm rounded-2xl p-6 animate-fade-up">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-bold">Portfolio Value</h3>
-        <ToggleGroup type="single" value={period} onValueChange={(value) => value && setPeriod(value as Period)}>
-          <ToggleGroupItem value="1D">1D</ToggleGroupItem>
-          <ToggleGroupItem value="1W">1W</ToggleGroupItem>
-          <ToggleGroupItem value="1M">1M</ToggleGroupItem>
-          <ToggleGroupItem value="1Y">1Y</ToggleGroupItem>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#8B5CF6] flex items-center justify-center">
+            <span className="text-white font-semibold">$</span>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-white">Portfolio Value</h3>
+            <p className="text-gray-400 text-sm">USD/EUR</p>
+          </div>
+        </div>
+        <ToggleGroup 
+          type="single" 
+          value={period} 
+          onValueChange={(value) => value && setPeriod(value as Period)}
+          className="bg-[#2a2435] rounded-xl p-1"
+        >
+          <ToggleGroupItem value="1D" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1D</ToggleGroupItem>
+          <ToggleGroupItem value="1W" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1W</ToggleGroupItem>
+          <ToggleGroupItem value="1M" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1M</ToggleGroupItem>
+          <ToggleGroupItem value="1Y" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1Y</ToggleGroupItem>
         </ToggleGroup>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={getData()}>
           <defs>
             <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <XAxis dataKey="date" stroke="#666" />
+          <XAxis 
+            dataKey="date" 
+            stroke="#666" 
+            axisLine={false}
+            tickLine={false}
+            dy={10}
+          />
+          <YAxis 
+            stroke="#666" 
+            axisLine={false}
+            tickLine={false}
+            dx={-10}
+          />
           <Tooltip
             contentStyle={{
-              background: "rgba(13, 17, 28, 0.9)",
+              background: "rgba(26, 22, 37, 0.9)",
               border: "none",
               borderRadius: "8px",
               padding: "12px",
+            }}
+            itemStyle={{
+              color: "#fff"
             }}
           />
           <Area
             type="monotone"
             dataKey="value"
-            stroke="#8884d8"
+            stroke="#8B5CF6"
+            strokeWidth={2}
             fillOpacity={1}
             fill="url(#colorValue)"
           />
