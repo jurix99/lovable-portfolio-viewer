@@ -59,11 +59,11 @@ export const PortfolioChart = () => {
   };
 
   return (
-    <div className="w-full h-[300px] bg-[#1a1625]/60 backdrop-blur-sm rounded-2xl p-6 animate-fade-up">
+    <div className="w-full h-[300px] glass rounded-2xl p-6 animate-fade-up">
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#8B5CF6] flex items-center justify-center">
-            <span className="text-white font-semibold">$</span>
+          <div className="w-8 h-8 rounded-full bg-[#1890ff] bg-opacity-20 flex items-center justify-center">
+            <span className="text-[#1890ff] font-semibold">$</span>
           </div>
           <div>
             <h3 className="text-xl font-bold text-white">Portfolio Value</h3>
@@ -74,20 +74,20 @@ export const PortfolioChart = () => {
           type="single" 
           value={period} 
           onValueChange={(value) => value && setPeriod(value as Period)}
-          className="bg-[#2a2435] rounded-xl p-1"
+          className="bg-black/40 rounded-xl p-1"
         >
-          <ToggleGroupItem value="1D" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1D</ToggleGroupItem>
-          <ToggleGroupItem value="1W" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1W</ToggleGroupItem>
-          <ToggleGroupItem value="1M" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1M</ToggleGroupItem>
-          <ToggleGroupItem value="1Y" className="data-[state=on]:bg-[#8B5CF6] data-[state=on]:text-white px-3 py-1">1Y</ToggleGroupItem>
+          <ToggleGroupItem value="1D" className="data-[state=on]:bg-[#1890ff] data-[state=on]:text-white px-3 py-1">1D</ToggleGroupItem>
+          <ToggleGroupItem value="1W" className="data-[state=on]:bg-[#1890ff] data-[state=on]:text-white px-3 py-1">1W</ToggleGroupItem>
+          <ToggleGroupItem value="1M" className="data-[state=on]:bg-[#1890ff] data-[state=on]:text-white px-3 py-1">1M</ToggleGroupItem>
+          <ToggleGroupItem value="1Y" className="data-[state=on]:bg-[#1890ff] data-[state=on]:text-white px-3 py-1">1Y</ToggleGroupItem>
         </ToggleGroup>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={getData()}>
           <defs>
             <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#1890ff" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#1890ff" stopOpacity={0}/>
             </linearGradient>
           </defs>
           <XAxis 
@@ -105,7 +105,7 @@ export const PortfolioChart = () => {
           />
           <Tooltip
             contentStyle={{
-              background: "rgba(26, 22, 37, 0.9)",
+              background: "rgba(0, 0, 0, 0.8)",
               border: "none",
               borderRadius: "8px",
               padding: "12px",
@@ -117,7 +117,7 @@ export const PortfolioChart = () => {
           <Area
             type="monotone"
             dataKey="value"
-            stroke="#8B5CF6"
+            stroke="#1890ff"
             strokeWidth={2}
             fillOpacity={1}
             fill="url(#colorValue)"

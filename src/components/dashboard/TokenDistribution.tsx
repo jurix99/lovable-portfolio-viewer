@@ -18,11 +18,11 @@ export const TokenDistribution = () => {
   let offset = 0;
 
   return (
-    <div className="w-full bg-[#1a1625]/60 backdrop-blur-sm rounded-2xl p-6 animate-fade-up">
+    <div className="w-full glass rounded-2xl p-6 animate-fade-up">
       <div className="flex items-center gap-2 mb-6">
-        <div className="w-8 h-8 rounded-full bg-[#8B5CF6] flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-[#1890ff] bg-opacity-20 flex items-center justify-center">
           <svg
-            className="w-4 h-4 text-white"
+            className="w-4 h-4 text-[#1890ff]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ export const TokenDistribution = () => {
         {TOKENS.map((token) => (
           <div
             key={token.name}
-            className="flex flex-col items-center p-3 rounded-xl bg-[#2a2435] hover:bg-[#2a2435]/80 transition-colors"
+            className="flex flex-col items-center p-3 rounded-xl bg-black/40 hover:bg-black/60 transition-colors"
           >
             <div
               className="w-3 h-3 rounded-full mb-2"
