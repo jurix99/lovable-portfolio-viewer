@@ -38,14 +38,11 @@ export const ApiKeyForm = ({ exchange, onSuccess, onClose }: ApiKeyFormProps) =>
   });
 
   const onSubmit = (values: z.infer<typeof apiKeySchema>) => {
-    // Store API keys in localStorage
-    localStorage.setItem(`${exchange}_credentials`, JSON.stringify(values));
-    
+    console.log(values);
     toast({
       title: "Configuration sauvegardée",
       description: `Vos clés API ${exchange} ont été enregistrées avec succès.`,
     });
-    
     form.reset();
     onSuccess?.();
     onClose?.();
