@@ -1,10 +1,11 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { Avatar } from "@/components/ui/avatar";
 
 interface TokenData {
   name: string;
   symbol: string;
-  icon: string;
+  logo: string;
   currentPrice: number;
   purchasePrice: number;
   performance: {
@@ -19,7 +20,7 @@ const tokens: TokenData[] = [
   {
     name: "Bitcoin",
     symbol: "BTC",
-    icon: "₿",
+    logo: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png",
     currentPrice: 52000,
     purchasePrice: 45000,
     performance: {
@@ -32,7 +33,7 @@ const tokens: TokenData[] = [
   {
     name: "Ethereum",
     symbol: "ETH",
-    icon: "Ξ",
+    logo: "https://assets.coingecko.com/coins/images/279/small/ethereum.png",
     currentPrice: 2800,
     purchasePrice: 2200,
     performance: {
@@ -45,7 +46,7 @@ const tokens: TokenData[] = [
   {
     name: "USDT",
     symbol: "USDT",
-    icon: "₮",
+    logo: "https://assets.coingecko.com/coins/images/325/small/Tether.png",
     currentPrice: 1.00,
     purchasePrice: 1.00,
     performance: {
@@ -108,7 +109,9 @@ export const TokenPerformance = () => {
                 <TableRow key={token.symbol} className="border-b border-[rgba(255,255,255,0.1)]">
                   <TableCell className="font-medium text-white">
                     <div className="flex items-center gap-2">
-                      <span className="text-lg">{token.icon}</span>
+                      <Avatar className="h-8 w-8">
+                        <img src={token.logo} alt={token.name} className="h-full w-full object-cover" />
+                      </Avatar>
                       <div>
                         <div>{token.name}</div>
                         <div className="text-sm text-gray-400">{token.symbol}</div>
