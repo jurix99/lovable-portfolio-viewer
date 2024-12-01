@@ -62,7 +62,7 @@ export const PortfolioChart = () => {
     <div className="w-full h-[400px] glass rounded-3xl p-6 animate-fade-up">
       <div className="flex flex-col gap-1 mb-6">
         <div className="flex items-baseline gap-2">
-          <h3 className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-rose-300 bg-clip-text text-transparent">
+          <h3 className="text-4xl font-bold bg-gradient-to-r from-pink-400 to-pink-500 bg-clip-text text-transparent">
             $34,534.24
           </h3>
           <span className="text-[#4CAF50] bg-[#4CAF50]/10 px-2 py-1 rounded-full text-sm">
@@ -77,7 +77,7 @@ export const PortfolioChart = () => {
           <AreaChart data={getData()}>
             <defs>
               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="rgb(244, 114, 182)" stopOpacity={0.4}/>
+                <stop offset="5%" stopColor="rgb(244, 114, 182)" stopOpacity={0.3}/>
                 <stop offset="95%" stopColor="rgb(244, 114, 182)" stopOpacity={0}/>
               </linearGradient>
             </defs>
@@ -97,9 +97,9 @@ export const PortfolioChart = () => {
             />
             <Tooltip
               contentStyle={{
-                background: "rgba(0, 0, 0, 0.8)",
-                border: "none",
-                borderRadius: "8px",
+                background: "rgba(23, 19, 29, 0.9)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: "12px",
                 padding: "12px",
               }}
               itemStyle={{ color: "#fff" }}
@@ -122,25 +122,25 @@ export const PortfolioChart = () => {
           type="single" 
           value={period} 
           onValueChange={(value) => value && setPeriod(value as Period)}
-          className="bg-[#1a1a1a] rounded-full p-1"
+          className="bg-card rounded-full p-1"
         >
-          <ToggleGroupItem value="24H" className="data-[state=on]:bg-[#333] data-[state=on]:text-white px-4 py-2 rounded-full">24H</ToggleGroupItem>
-          <ToggleGroupItem value="7D" className="data-[state=on]:bg-[#333] data-[state=on]:text-white px-4 py-2 rounded-full">7D</ToggleGroupItem>
-          <ToggleGroupItem value="1M" className="data-[state=on]:bg-[#333] data-[state=on]:text-white px-4 py-2 rounded-full">1M</ToggleGroupItem>
-          <ToggleGroupItem value="1Y" className="data-[state=on]:bg-[#333] data-[state=on]:text-white px-4 py-2 rounded-full">1Y</ToggleGroupItem>
+          <ToggleGroupItem value="24H" className="data-[state=on]:bg-primary data-[state=on]:text-white px-4 py-2 rounded-full">24H</ToggleGroupItem>
+          <ToggleGroupItem value="7D" className="data-[state=on]:bg-primary data-[state=on]:text-white px-4 py-2 rounded-full">7D</ToggleGroupItem>
+          <ToggleGroupItem value="1M" className="data-[state=on]:bg-primary data-[state=on]:text-white px-4 py-2 rounded-full">1M</ToggleGroupItem>
+          <ToggleGroupItem value="1Y" className="data-[state=on]:bg-primary data-[state=on]:text-white px-4 py-2 rounded-full">1Y</ToggleGroupItem>
         </ToggleGroup>
 
         <div className="flex gap-2">
-          <button className="p-3 bg-[#1a1a1a] rounded-full hover:bg-[#333] transition-colors">
+          <button className="p-3 bg-card hover:bg-primary/10 rounded-full transition-colors">
             <DollarSign className="w-5 h-5" />
           </button>
-          <button className="p-3 bg-[#1a1a1a] rounded-full hover:bg-[#333] transition-colors">
+          <button className="p-3 bg-card hover:bg-primary/10 rounded-full transition-colors">
             <ArrowLeftRight className="w-5 h-5" />
           </button>
-          <button className="p-3 bg-[#1a1a1a] rounded-full hover:bg-[#333] transition-colors">
+          <button className="p-3 bg-card hover:bg-primary/10 rounded-full transition-colors">
             <History className="w-5 h-5" />
           </button>
-          <button className="p-3 bg-[#1a1a1a] rounded-full hover:bg-[#333] transition-colors">
+          <button className="p-3 bg-card hover:bg-primary/10 rounded-full transition-colors">
             <Download className="w-5 h-5" />
           </button>
         </div>
